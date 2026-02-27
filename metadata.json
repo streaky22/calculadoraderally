@@ -1,0 +1,5 @@
+{
+  "name": "WRC Sim Racing Timing",
+  "description": "Rally timing and results management system with admin panel and public view.",
+  "requestFramePermissions": []
+}

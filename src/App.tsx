@@ -7,7 +7,7 @@ import React, { useState, useRef } from 'react';
 import { AdminPanel } from './components/AdminPanel';
 import { PublicView } from './components/PublicView';
 import { Rally } from './types';
-import { Download, Upload } from 'lucide-react';
+import { Download, Upload, Trash2 } from 'lucide-react';
 
 const INITIAL_RALLY: Rally = {
   id: 'r1',
@@ -80,6 +80,23 @@ export default function App() {
     }
   };
 
+  const handleReset = () => {
+    console.log('Iniciando borrado de datos...');
+    if (window.confirm('¿Estás seguro de que quieres borrar todos los datos del rally? Esta acción no se puede deshacer.')) {
+      const freshRally: Rally = {
+        id: 'r' + Date.now(),
+        name: 'Nuevo Rally',
+        participants: [],
+        stages: [],
+        penaltyConfigs: [],
+        stageTimes: []
+      };
+      setRally(freshRally);
+      localStorage.setItem('rally_data', JSON.stringify(freshRally));
+      console.log('Datos borrados correctamente.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 font-sans">
       <header className="bg-slate-900 text-white shadow-md">
@@ -108,6 +125,14 @@ export default function App() {
                 >
                   <Upload size={16} />
                   <span className="hidden sm:inline">Import</span>
+                </button>
+                <button 
+                  onClick={handleReset}
+                  className="flex items-center gap-1 text-xs font-medium text-red-400 hover:text-red-300 transition-colors ml-2 pl-2 border-l border-slate-700"
+                  title="Clear All Data"
+                >
+                  <Trash2 size={16} />
+                  <span className="hidden sm:inline">Borrar Todo</span>
                 </button>
                 <input 
                   type="file" 

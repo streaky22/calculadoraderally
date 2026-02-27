@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 
 export default defineConfig({
-  // El punto y barra hace que las rutas sean relativas y funcionen siempre
-  base: './', 
+  base: '/calculadoraderally/',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
